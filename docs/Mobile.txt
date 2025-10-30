@@ -1,0 +1,47 @@
+Teste Mobile
+
+O que é mobile? Categoria ampla, que abrange?
+-celular
+tablets
+smartwear (vestiveis): relogio, pulseiras
+smartTVS
+central multimidia de automóveis
+Multimidia de eletrodomesticos
+
+Tipo de aplicativos:
+Utilizar um Browser instalado no celular para acessar um site
+Um site que finge ser um aplicativo: WebDav
+Nativo (app de verdade, especifico para um SO: Android ou IOS)
+Hibrido (app de verdade, um projeto gera 2 apps: Android e IOS)
+
+Mobile tem fome de hardware
+ processador: I5 ou superior
+ RAM: 16 Gb
+ Disco: SSD 512 GB ou mais
+ Recursos de Hypervisor / HiperThread
+
+ automação Mobile - etapas:
+ Mapeamento: emulador
+ Gravação: serviço na nuvem - saucelabs.com
+ programação? idem
+
+ Existe como testar
+ local, no seu computador
+ emulador
+ aparelho fisico conectado
+ remoto, na Internet
+ emulador
+ aparelho fisico conectado
+
+ Instalações e Configurações
+ - Appium Desktop --> Appium Server: Controlar o ambiente de automação
+ - Apk info -- > descobrir o apkPackage ("url" do app) e o apkActivity (entrada)
+ - Appium Inspector --> Mapear os elementos 
+ - Android Studio --> SDK Manager e Emuladores
+ - saucelabs.com --> Device Farm (serviço) permite testar em aparelho e emuladores
+
+ O nosso app alvo vai ser o MyDemoApp, criado pela saucelabs
+
+ Para realizar um teste precisa instalar:
+ - o Emulador da versão de Android desejada (Virtual Device Manager)
+ - o SKK da versão de Android da mesma versão desejada (SDK Manager)
