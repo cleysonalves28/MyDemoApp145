@@ -1,0 +1,71 @@
+// This sample code supports WebdriverIO client >=9.7.0
+// (npm i --save webdriverio)
+// Then paste this into a .js file and run with Node:
+// node <file>.js
+
+import {remote} from 'webdriverio';
+async function main () {
+  const caps = {
+  "platformName": "Android",
+  "appium:platformVersion": "13.0",
+  "appium:deviceName": "emulator5554",
+  "appium:deviceOrientation": "portrait",
+  "appium:appPackage": "com.saucelabs.mydemoapp.android",
+  "appium:appActivity": "com.saucelabs.mydemoapp.android.view.activities.SplashActivity",
+  "appium:automationName": "UiAutomator2",
+  "browserName": "",
+  "appium:ensureWebviewsHavePages": true,
+  "appium:nativeWebScreenshot": true,
+  "appium:newCommandTimeout": 3600,
+  "appium:connectHardwareKeyboard": true,
+  "webSocketUrl": true,
+  "unhandledPromptBehavior": "ignore"
+}
+  const driver = await remote({
+    protocol: "http",
+    hostname: "127.0.0.1",
+    port: 4723,
+    path: "/",
+    capabilities: caps
+  });
+  const el1 = await driver.$("accessibility id:title");
+  await el1.click();
+  let status = await driver.status();
+  await driver.executeScript("mobile:getCurrentPackage");
+  let sessionDetails = await driver.getSession();
+  const el2 = await driver.$("-android uiautomator:new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/productIV\").instance(0)");
+  await el2.click();
+  const el3 = await driver.$("id:com.saucelabs.mydemoapp.android:id/productTV");
+  await el3.click();
+  const el4 = await driver.$("id:com.saucelabs.mydemoapp.android:id/priceTV");
+  await el4.click();
+  await driver.action('pointer')
+    .move({ duration: 0, x: 541, y: 1832 })
+    .down({ button: 0 })
+    .pause(50)
+    .up({ button: 0 })
+    .perform();
+  await driver.action('pointer')
+    .move({ duration: 0, x: 524, y: 1828 })
+    .down({ button: 0 })
+    .move({ duration: 1000, x: 520, y: 1069 })
+    .up({ button: 0 })
+    .perform();
+  const el5 = await driver.$("accessibility id:Tap to add product to cart");
+  await el5.click();
+  const el6 = await driver.$("id:com.saucelabs.mydemoapp.android:id/cartTV");
+  await el6.click();
+  const el7 = await driver.$("id:com.saucelabs.mydemoapp.android:id/cartIV");
+  await el7.click();
+  const el8 = await driver.$("id:com.saucelabs.mydemoapp.android:id/productTV");
+  await el8.click();
+  const el9 = await driver.$("id:com.saucelabs.mydemoapp.android:id/titleTV");
+  await el9.click();
+  const el10 = await driver.$("id:com.saucelabs.mydemoapp.android:id/priceTV");
+  await el10.click();
+  const el11 = await driver.$("id:com.saucelabs.mydemoapp.android:id/noTV");
+  await el11.click();
+  await driver.deleteSession();
+}
+
+main().catch(console.log);

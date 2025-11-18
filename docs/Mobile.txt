@@ -45,3 +45,8 @@ Mobile tem fome de hardware
  Para realizar um teste precisa instalar:
  - o Emulador da versão de Android desejada (Virtual Device Manager)
  - o SKK da versão de Android da mesma versão desejada (SDK Manager)
+
+
+ Avisos em 10/11/2025
+ - Reposições: 10,12,13 (seg quarta e quainta) - 17, 19,  24 e 26/11 final (Seg e quarta)
+
