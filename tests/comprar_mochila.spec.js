@@ -26,7 +26,7 @@ async function main () {
 }
   const driver = await remote({
     protocol: "http",
-    hostname: "127.0.0.1",
+    hostname: "127.0.0.1", // https://oauth-calvesilva.nascimento-d0f91:4d3e4f55-7a0d-4aba-9588-78a57653735b@ondemand.us-west-1.saucelabs.com:443/wd/hub
     port: 4723,
     path: "/",
     capabilities: caps
@@ -38,8 +38,8 @@ async function main () {
   await assert.strictEqual(resultado_atual, "Products")
 
   // Clicar na Mochila
-  const el2 = await driver.$("-android uiautomator:new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/productIV\").instance(0)")
-  await el2.click()
+  const lbl_clicar_mochila = await driver.$("-android uiautomator:new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/productIV\").instance(0)")
+  await lbl_clicar_mochila.click()
 
   // Nome do produto
    const lbl_nome_produto = await driver.$("id:com.saucelabs.mydemoapp.android:id/productTV")
@@ -47,8 +47,9 @@ async function main () {
    await assert.strictEqual(resultado_atual, "Sauce Labs Backpack")
 
   // Preço do produto
-  const el4 = await driver.$("id:com.saucelabs.mydemoapp.android:id/priceTV")
-  await el4.click() // comparar o preço ex: linha 36
+  const lbl_preco_produto = await driver.$("id:com.saucelabs.mydemoapp.android:id/priceTV")
+  resultado_atual = await lbl_preco_produto.getText() // comparar o preço ex: linha 36
+  await assert.strictEqual(resultado_atual, "$ 29.99")
 
   // Arrasta para cima
   await driver.action('pointer')
@@ -59,32 +60,37 @@ async function main () {
     .perform();
 
   // Adicionar no carrinho  
-  const el5 = await driver.$("accessibility id:Tap to add product to cart");
-  await el5.click() // ok
+  const lbl_botao_Adicionar_Carrinho = await driver.$("accessibility id:Tap to add product to cart");
+  await lbl_botao_Adicionar_Carrinho.click() // ok
 
   // Quantidade no carrinho
-  const el6 = await driver.$("id:com.saucelabs.mydemoapp.android:id/cartTV");
-  await el6.click() // comparar
+  const lbl_verificar_Qnt_Carrinho = await driver.$("id:com.saucelabs.mydemoapp.android:id/cartTV");
+  resultado_atual = await lbl_verificar_Qnt_Carrinho.getText() // comparar
+  await assert.strictEqual(resultado_atual, "1")
 
   // Ir para o carrinho
-  const el7 = await driver.$("id:com.saucelabs.mydemoapp.android:id/cartIV");
-  await el7.click() // ok
+  const lbl_Clicar_Carrinho = await driver.$("id:com.saucelabs.mydemoapp.android:id/cartIV");
+  await lbl_Clicar_Carrinho.click() // ok
 
   // Cart
-  const el8 = await driver.$("id:com.saucelabs.mydemoapp.android:id/productTV");
-  await el8.click() // verificar a My Cart
+  const lbl_Meu_Carrinho= await driver.$("id:com.saucelabs.mydemoapp.android:id/productTV");
+  resultado_atual = await lbl_Meu_Carrinho.getText() // verificar a My Cart
+  await assert.strictEqual(resultado_atual, "My Cart")
 
   // Nome do produto
-  const el9 = await driver.$("id:com.saucelabs.mydemoapp.android:id/titleTV");
-  await el9.click() // verificar ex: linha 36
+  const lbl_produto = await driver.$("id:com.saucelabs.mydemoapp.android:id/titleTV");
+  resultado_atual = await lbl_produto.getText() // verificar ex: linha 36
+  await assert.strictEqual(resultado_atual, "Sauce Labs Backpack")
 
   // Preço
-  const el10 = await driver.$("id:com.saucelabs.mydemoapp.android:id/priceTV");
-  await el10.click() // verificar ex: linha 36
+  const Checar_preco = await driver.$("id:com.saucelabs.mydemoapp.android:id/priceTV");
+  resultado_atual = await Checar_preco.getText() // verificar ex: linha 36
+  await assert.strictEqual(resultado_atual, "$ 29.99")
 
   // Quantidade
-  const el11 = await driver.$("id:com.saucelabs.mydemoapp.android:id/noTV");
-  await el11.click() // verificar ex: linha 36
+  const Checar_Qnt = await driver.$("id:com.saucelabs.mydemoapp.android:id/noTV");
+  resultado_atual = await Checar_Qnt.getText() // verificar ex: linha 36
+  await assert.strictEqual(resultado_atual, "1")
 
   // Termina - Apaga a sessão
   await driver.deleteSession();
